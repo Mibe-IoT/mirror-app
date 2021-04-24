@@ -2,9 +2,10 @@ group 'com.mibe.bm'
 version '1.0-SNAPSHOT'
 
 repositories {
-
+    jcenter()
 }
 
 dependencies {
-
+    api 'com.apptastic:rssreader:2.5.0'
+    implementation 'org.jsoup:jsoup:1.13.1'
 }
