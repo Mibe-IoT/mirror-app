@@ -1,32 +1,25 @@
 package com.mibe.bm.app.panel
 
 import com.mibe.bm.app.component.JMultilineLabel
-import com.mibe.bm.app.theme.DEFAULT_BG
 import com.mibe.bm.app.theme.ELEMENT_FONT_CONTENT_SIZE
-import com.mibe.bm.app.theme.ELEMENT_FONT_TITLE_SIZE
 import com.mibe.bm.app.theme.FONT_COLOR
 import com.mibe.bm.wi.feed.model.News
 import com.mibe.bm.wi.feed.service.NewsService
 import java.awt.Font
 
-const val NEWS_AMOUNT = 9L
 
 class NewsPanel(
     private val newsService: NewsService,
 ) : VerticalAppPanel() {
+
+    val NEWS_AMOUNT = 9L
 
     private var newsList: List<News> = listOf()
     private val panelTitle = AppPanelType.NEWS.asciiArt
     private val title: JMultilineLabel
 
     init {
-        border = borderPadding
-        background = DEFAULT_BG
-        title = JMultilineLabel(panelTitle).apply {
-            font = Font(Font.MONOSPACED, Font.BOLD, ELEMENT_FONT_TITLE_SIZE)
-            foreground = FONT_COLOR
-            border = verticalListMarginBorder
-        }
+        title = creteTitleLabel(panelTitle)
         loadNews()
         redraw()
         isVisible = true
@@ -38,8 +31,10 @@ class NewsPanel(
         validate()
     }
 
-    fun loadNews() {
-        newsList = newsService.getNews(NEWS_AMOUNT)
+    private fun loadNews() {
+        newsList = newsService.getNews(NEWS_AMOUNT).ifEmpty {
+            mutableListOf(News("No news were found", "", ""))
+        }
     }
 
     private fun redraw() {

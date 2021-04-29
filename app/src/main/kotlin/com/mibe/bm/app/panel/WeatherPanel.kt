@@ -1,11 +1,29 @@
 package com.mibe.bm.app.panel
 
-import java.awt.Color
+import com.mibe.bm.app.component.JMultilineLabel
+import com.mibe.bm.wi.feed.service.NewsService
 
-class WeatherPanel : VerticalAppPanel() {
+class WeatherPanel(
+    private val newsService: NewsService,
+) : VerticalAppPanel() {
+
+    private val panelTitle = AppPanelType.WEATHER.asciiArt
+    private val title: JMultilineLabel
 
     init {
-        background = Color.WHITE
+        title = creteTitleLabel(panelTitle)
+        redraw()
+        isVisible = true
+    }
+
+    override fun onAction() {
+        redraw()
+        validate()
+    }
+
+    private fun redraw() {
+        removeAll()
+        add(title)
     }
 
 }

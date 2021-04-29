@@ -16,7 +16,7 @@ class NewsRssService(
     override fun getNews(amount: Long, contentMaxLength: Int): List<News> {
         val inputStream = File(pathService.getFilePath("newsUrls.txt")).inputStream()
         val urls = inputStream.bufferedReader().lines().collect(Collectors.toList())
-        return urls.stream().map { reader.read(it) }
+        val news = urls.stream().map { reader.read(it) }
             .flatMap { it.limit(amount) }
             .limit(amount * 2)
             .filter {
@@ -36,8 +36,11 @@ class NewsRssService(
             }
             .collect(Collectors.toList())
             .shuffled()
-            .subList(0, amount.toInt())
-            .sortedBy { it.date }
+        return if (news.isEmpty())
+            news
+        else
+            news.subList(0, (amount - 1).toInt())
+                .sortedBy { it.date }
     }
 
 }

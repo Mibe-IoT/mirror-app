@@ -1,8 +1,10 @@
 package com.mibe.bm.app.panel
 
+import com.mibe.bm.app.component.JMultilineLabel
 import com.mibe.bm.app.theme.BORDER_PADDING
 import com.mibe.bm.app.theme.DEFAULT_BG
 import com.mibe.bm.app.theme.DEFAULT_FONT
+import java.awt.Font
 import javax.swing.BorderFactory
 import javax.swing.JPanel
 import javax.swing.border.Border
@@ -22,8 +24,11 @@ open class AppPanel : JPanel() {
         background = DEFAULT_BG
     }
 
-    fun decorateTitle(title: String): String {
-        return title
+    open fun creteTitleLabel(title: String): JMultilineLabel {
+        return JMultilineLabel(title).apply {
+            font = Font(Font.MONOSPACED, Font.BOLD, com.mibe.bm.app.theme.ELEMENT_FONT_TITLE_SIZE)
+            foreground = com.mibe.bm.app.theme.FONT_COLOR
+        }
     }
 
     open fun onAction() {}

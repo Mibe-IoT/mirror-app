@@ -1,8 +1,7 @@
 package com.mibe.bm.app.panel
 
+import com.mibe.bm.app.component.JMultilineLabel
 import com.mibe.bm.app.theme.VERTICAL_LIST_GAP
-import java.awt.Component
-import javax.swing.Box
 import javax.swing.BoxLayout
 import javax.swing.border.EmptyBorder
 
@@ -14,8 +13,9 @@ open class VerticalAppPanel : AppPanel() {
         layout = BoxLayout(this, BoxLayout.Y_AXIS)
     }
 
-    fun addComponent(component: Component) {
-        add(component)
-        add(Box.createVerticalGlue())
+    override fun creteTitleLabel(title: String): JMultilineLabel {
+        return super.creteTitleLabel(title).apply {
+            border = verticalListMarginBorder
+        }
     }
 }
