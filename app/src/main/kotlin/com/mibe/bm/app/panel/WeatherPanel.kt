@@ -1,12 +1,10 @@
 package com.mibe.bm.app.panel
 
 import java.awt.Color
-import javax.swing.JPanel
 
-class WeatherPanel : JPanel() {
+class WeatherPanel : VerticalAppPanel() {
 
     init {
-        isVisible = true
         background = Color.WHITE
     }
 

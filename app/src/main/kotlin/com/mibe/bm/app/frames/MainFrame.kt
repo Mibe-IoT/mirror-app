@@ -1,38 +1,61 @@
 package com.mibe.bm.app.frames
 
-import com.mibe.bm.app.panel.NewsPanel
-import com.mibe.bm.app.panel.WeatherPanel
-import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
-import java.lang.Thread.sleep
+import com.mibe.bm.app.panel.AppPanel
+import com.mibe.bm.app.panel.DefaultPanel
+import java.awt.Dimension
 import javax.swing.JFrame
+import javax.swing.JPanel
 
-class MainFrame : JFrame(), KeyListener {
+class MainFrame(additionalPanels: List<AppPanel> = listOf()) : JFrame() {
+
+    private val panels: MutableList<AppPanel> = mutableListOf(DefaultPanel())
+    private var currentPanel = 0
+
+    private val nextPanel: AppPanel
+        get() {
+            if (++currentPanel >= panels.size) {
+                currentPanel = 0
+            }
+            return panels[currentPanel]
+        }
+
+    private val previousPanel: AppPanel
+        get() {
+            if (--currentPanel < 0) {
+                currentPanel = panels.size - 1
+            }
+            return panels[currentPanel]
+        }
 
     init {
-        extendedState = MAXIMIZED_BOTH
+//        extendedState = MAXIMIZED_BOTH
+        size = Dimension(500, 500)
         isUndecorated = true
+        isResizable = true
         defaultCloseOperation = EXIT_ON_CLOSE
-        contentPane = WeatherPanel()
-        addKeyListener(this)
+        contentPane = panels[0]
+        setLocationRelativeTo(null)
+        panels.addAll(additionalPanels)
+
+
+        isVisible = true
     }
 
-    fun onInit() {
-        sleep(1000)
-        contentPane = NewsPanel()
-        contentPane.revalidate()
-        sleep(1000)
-        contentPane = WeatherPanel()
-        contentPane.revalidate()
+    fun nextPanel() {
+        changePanelTo(nextPanel)
     }
 
-    override fun keyTyped(p0: KeyEvent?) {
-        println(p0)
+    fun previousPanel() {
+        changePanelTo(previousPanel)
     }
 
-    override fun keyPressed(p0: KeyEvent?) {
+    fun doAction() {
+        panels[currentPanel].onAction()
     }
 
-    override fun keyReleased(p0: KeyEvent?) {
+    private fun changePanelTo(panel: JPanel) {
+        contentPane = panel
+        validate()
     }
+
 }

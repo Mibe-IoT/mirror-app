@@ -1,4 +1,4 @@
-package com.mibe.bm.wi.feed.service
+package com.mibe.bm.wi.files
 
 class FilePathServiceImpl : FilePathService {
     override fun getFilePath(filename: String): String {
