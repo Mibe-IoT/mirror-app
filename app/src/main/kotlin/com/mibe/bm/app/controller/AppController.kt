@@ -39,13 +39,4 @@ class AppController(
         mainFrame.doAction()
     }
 
-    override fun onA() {
-        messageService.changeLocaleTo(Locale.forLanguageTag("ru_RU"))
-        mainFrame.doUpdate()
-    }
-
-    override fun onS() {
-        messageService.changeLocaleTo(Locale.getDefault())
-        mainFrame.doUpdate()
-    }
 }
