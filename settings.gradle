@@ -1,4 +1,0 @@
-rootProject.name = 'black-mirror'
-include 'world-info'
-include 'app'
-
