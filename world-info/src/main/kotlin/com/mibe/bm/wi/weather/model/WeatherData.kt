@@ -1,3 +1,6 @@
 package com.mibe.bm.wi.weather.model
 
-data class WeatherData(val temperature: Int)
+data class WeatherData(
+    val weather: Weather,
+    val main: WeatherMainData
+)
