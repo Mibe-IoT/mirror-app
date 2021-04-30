@@ -1,7 +1,7 @@
 package com.mibe.bm.app.panel
 
-import java.util.*
+import com.mibe.bm.app.service.MessageService
 
 class DefaultPanel(
-    messageSource: Properties
-) : VerticalAppPanel(messageSource)
+    messageService: MessageService
+) : VerticalAppPanel(messageService)

@@ -1,17 +1,17 @@
 package com.mibe.bm.app.panel
 
 import com.mibe.bm.app.component.JMultilineLabel
+import com.mibe.bm.app.service.MessageService
 import com.mibe.bm.app.theme.BORDER_PADDING
 import com.mibe.bm.app.theme.DEFAULT_BG
 import com.mibe.bm.app.theme.DEFAULT_FONT
 import java.awt.Font
-import java.util.*
 import javax.swing.BorderFactory
 import javax.swing.JPanel
 import javax.swing.border.Border
 
 open class AppPanel(
-    protected val messageSource: Properties
+    protected val messageService: MessageService
 ) : JPanel() {
 
     protected val font = DEFAULT_FONT
@@ -42,5 +42,6 @@ open class AppPanel(
     }
 
     open fun onAction() {}
+    open fun onUpdate() {}
 
 }

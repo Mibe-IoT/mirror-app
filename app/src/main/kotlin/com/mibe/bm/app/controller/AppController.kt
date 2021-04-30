@@ -2,13 +2,15 @@ package com.mibe.bm.app.controller
 
 import com.mibe.bm.app.frames.MainFrame
 import java.awt.GraphicsEnvironment
+import java.util.*
 import kotlin.system.exitProcess
 
 class AppController(
     private val mainFrame: MainFrame,
 ) : KeyboardListener.Callbacks {
 
-    private val keyboardListener: KeyboardListener = KeyboardListener(this)
+    private val keyboardListener = com.mibe.bm.app.controller.KeyboardListener(this)
+    private var currentLocale: Locale = Locale.getDefault()
 
     init {
         mainFrame.addKeyListener(keyboardListener)

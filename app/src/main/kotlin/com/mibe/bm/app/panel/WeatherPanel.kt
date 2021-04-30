@@ -1,16 +1,16 @@
 package com.mibe.bm.app.panel
 
 import com.mibe.bm.app.component.JMultilineLabel
+import com.mibe.bm.app.service.MessageService
 import com.mibe.bm.wi.weather.controller.WeatherController
 import com.mibe.bm.wi.weather.model.WeatherData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 class WeatherPanel(
-    messageSource: Properties,
+    messageService: MessageService,
     private val weatherController: WeatherController
-) : VerticalAppPanel(messageSource) {
+) : VerticalAppPanel(messageService) {
 
     private val panelTitle = AppPanelType.WEATHER.asciiArt
     private val title: JMultilineLabel = creteTitleLabel(panelTitle)
@@ -23,6 +23,10 @@ class WeatherPanel(
     }
 
     override fun onAction() {
+        loadWeather()
+    }
+
+    override fun onUpdate() {
         loadWeather()
     }
 

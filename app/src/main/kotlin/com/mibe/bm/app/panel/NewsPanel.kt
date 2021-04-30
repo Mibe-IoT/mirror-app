@@ -1,18 +1,18 @@
 package com.mibe.bm.app.panel
 
 import com.mibe.bm.app.component.JMultilineLabel
+import com.mibe.bm.app.service.MessageService
 import com.mibe.bm.app.theme.ELEMENT_FONT_CONTENT_SIZE
 import com.mibe.bm.app.theme.FONT_COLOR
 import com.mibe.bm.wi.feed.model.News
 import com.mibe.bm.wi.feed.service.NewsService
 import java.awt.Font
-import java.util.*
 import javax.swing.Box
 
 class NewsPanel(
-    messageSource: Properties,
+    messageService: MessageService,
     private val newsService: NewsService,
-) : VerticalAppPanel(messageSource) {
+) : VerticalAppPanel(messageService) {
 
     val NEWS_AMOUNT = 9L
 
