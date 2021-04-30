@@ -12,7 +12,7 @@ class WeatherPanel(
 
     private val panelTitle = AppPanelType.WEATHER.asciiArt
     private val title: JMultilineLabel = creteTitleLabel(panelTitle)
-    private lateinit var weatherData: WeatherData
+    private var weatherData: WeatherData? = null
 
     init {
         add(title)
@@ -24,10 +24,11 @@ class WeatherPanel(
         loadWeather()
     }
 
-    private fun redraw(weatherData: WeatherData) {
+    private fun redraw() {
         removeAll()
         add(title)
-        addWeatherData(weatherData)
+        weatherData?.let { addWeatherData(it) } ?: add(createJMultilineLabel("No internet connection"))
+
         validate()
     }
 
@@ -35,9 +36,8 @@ class WeatherPanel(
         GlobalScope.launch {
             weatherData = weatherController.getWeatherData()
             println(weatherData)
-
         }.invokeOnCompletion {
-            redraw(weatherData)
+            redraw()
         }
     }
 

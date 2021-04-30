@@ -6,7 +6,7 @@ import com.mibe.bm.app.theme.FONT_COLOR
 import com.mibe.bm.wi.feed.model.News
 import com.mibe.bm.wi.feed.service.NewsService
 import java.awt.Font
-
+import javax.swing.Box
 
 class NewsPanel(
     private val newsService: NewsService,
@@ -32,14 +32,20 @@ class NewsPanel(
     }
 
     private fun loadNews() {
-        newsList = newsService.getNews(NEWS_AMOUNT).ifEmpty {
-            mutableListOf(News("No news were found", "", ""))
+        newsList = try {
+            newsService.getNews(NEWS_AMOUNT)
+        } catch (e: Exception) {
+            listOf()
         }
     }
 
     private fun redraw() {
         removeAll()
         add(title)
+        newsList.ifEmpty {
+            add(Box.createVerticalGlue())
+            add(createJMultilineLabel("No internet connection"))
+        }
         newsList.forEach { addNewsRow(it) }
     }
 
