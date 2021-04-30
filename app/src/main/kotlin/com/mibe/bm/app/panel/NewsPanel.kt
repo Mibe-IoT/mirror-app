@@ -10,9 +10,9 @@ import java.awt.Font
 import javax.swing.Box
 
 class NewsPanel(
-    messageService: MessageService,
+    private val messageService: MessageService,
     private val newsService: NewsService,
-) : VerticalAppPanel(messageService) {
+) : VerticalAppPanel() {
 
     val NEWS_AMOUNT = 9L
 

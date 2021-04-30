@@ -19,5 +19,5 @@ fun main() {
         NewsPanel(messageService, NewsRssService(filePathService)),
         WeatherPanel(messageService, WeatherController(filePathService))
     )
-    val controller = AppController(MainFrame(panels))
+    val controller = AppController(messageService, MainFrame(panels))
 }

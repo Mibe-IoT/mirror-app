@@ -1,7 +1,6 @@
 package com.mibe.bm.app.panel
 
 import com.mibe.bm.app.component.JMultilineLabel
-import com.mibe.bm.app.service.MessageService
 import com.mibe.bm.app.theme.BORDER_PADDING
 import com.mibe.bm.app.theme.DEFAULT_BG
 import com.mibe.bm.app.theme.DEFAULT_FONT
@@ -10,9 +9,7 @@ import javax.swing.BorderFactory
 import javax.swing.JPanel
 import javax.swing.border.Border
 
-open class AppPanel(
-    protected val messageService: MessageService
-) : JPanel() {
+open class AppPanel : JPanel() {
 
     protected val font = DEFAULT_FONT
 

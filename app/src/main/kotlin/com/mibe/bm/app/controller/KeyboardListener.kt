@@ -10,6 +10,8 @@ class KeyboardListener(private val callbacks: Callbacks) : KeyAdapter() {
         fun onLeft() {}
         fun onRight() {}
         fun onAction() {}
+        fun onA() {}
+        fun onS() {}
     }
 
     override fun keyPressed(e: KeyEvent) {
@@ -17,6 +19,8 @@ class KeyboardListener(private val callbacks: Callbacks) : KeyAdapter() {
             KeyEvent.VK_LEFT -> callbacks.onLeft()
             KeyEvent.VK_RIGHT -> callbacks.onRight()
             KeyEvent.VK_R -> callbacks.onAction()
+            KeyEvent.VK_A -> callbacks.onA()
+            KeyEvent.VK_S -> callbacks.onS()
         }
         if (e.isControlDown) {
             if (e.keyCode == KeyEvent.VK_Q) {

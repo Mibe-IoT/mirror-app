@@ -11,4 +11,7 @@ class MessageServiceImpl(private val messageSource: ResourceBundle, locale: Loca
         return messageSource.getString(key)
     }
 
+    override fun changeLocaleTo(locale: Locale) {
+        this.currentLocale = locale
+    }
 }

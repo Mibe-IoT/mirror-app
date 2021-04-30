@@ -53,6 +53,10 @@ class MainFrame(additionalPanels: List<AppPanel> = listOf()) : JFrame() {
         panels[currentPanel].onAction()
     }
 
+    fun doUpdate() {
+        panels[currentPanel].onUpdate()
+    }
+
     private fun changePanelTo(panel: JPanel) {
         contentPane = panel
         validate()

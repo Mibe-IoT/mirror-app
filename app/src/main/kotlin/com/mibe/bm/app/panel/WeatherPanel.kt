@@ -6,19 +6,22 @@ import com.mibe.bm.wi.weather.controller.WeatherController
 import com.mibe.bm.wi.weather.model.WeatherData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.swing.BoxLayout
 
 class WeatherPanel(
-    messageService: MessageService,
+    private val messageService: MessageService,
     private val weatherController: WeatherController
-) : VerticalAppPanel(messageService) {
+) : AppPanel() {
 
     private val panelTitle = AppPanelType.WEATHER.asciiArt
     private val title: JMultilineLabel = creteTitleLabel(panelTitle)
     private var weatherData: WeatherData? = null
 
     init {
-        add(title)
+
         loadWeather()
+        layout = BoxLayout(this, BoxLayout.Y_AXIS)
+        add(title)
         isVisible = true
     }
 
@@ -34,7 +37,6 @@ class WeatherPanel(
         removeAll()
         add(title)
         weatherData?.let { addWeatherData(it) } ?: add(createJMultilineLabel("No internet connection"))
-
         validate()
     }
 
@@ -49,7 +51,7 @@ class WeatherPanel(
 
     private fun addWeatherData(weatherData: WeatherData) {
         val labelWeatherMain = createJMultilineLabel(weatherData.weather[0].main)
-        val labelWeatherDescription = createJMultilineLabel(weatherData.weather[0].main)
+        val labelWeatherDescription = createJMultilineLabel(weatherData.weather[0].description)
         val temp = createJMultilineLabel(weatherData.main.temp.toString())
         add(labelWeatherMain)
         add(labelWeatherDescription)

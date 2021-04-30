@@ -1,11 +1,13 @@
 package com.mibe.bm.app.controller
 
 import com.mibe.bm.app.frames.MainFrame
+import com.mibe.bm.app.service.MessageService
 import java.awt.GraphicsEnvironment
 import java.util.*
 import kotlin.system.exitProcess
 
 class AppController(
+    private val messageService: MessageService,
     private val mainFrame: MainFrame,
 ) : KeyboardListener.Callbacks {
 
@@ -35,5 +37,15 @@ class AppController(
 
     override fun onAction() {
         mainFrame.doAction()
+    }
+
+    override fun onA() {
+        messageService.changeLocaleTo(Locale.forLanguageTag("ru_RU"))
+        mainFrame.doUpdate()
+    }
+
+    override fun onS() {
+        messageService.changeLocaleTo(Locale.getDefault())
+        mainFrame.doUpdate()
     }
 }

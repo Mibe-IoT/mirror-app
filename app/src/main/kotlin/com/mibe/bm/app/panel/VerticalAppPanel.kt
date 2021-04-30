@@ -1,14 +1,11 @@
 package com.mibe.bm.app.panel
 
 import com.mibe.bm.app.component.JMultilineLabel
-import com.mibe.bm.app.service.MessageService
 import com.mibe.bm.app.theme.VERTICAL_LIST_GAP
 import javax.swing.BoxLayout
 import javax.swing.border.EmptyBorder
 
-open class VerticalAppPanel(
-    messageService: MessageService
-) : AppPanel(messageService) {
+open class VerticalAppPanel : AppPanel() {
 
     protected val verticalListMarginBorder = EmptyBorder(0, 0, VERTICAL_LIST_GAP, 0)
 
