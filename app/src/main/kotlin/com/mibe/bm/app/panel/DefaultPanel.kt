@@ -1,3 +1,7 @@
 package com.mibe.bm.app.panel
 
-class DefaultPanel : VerticalAppPanel()
+import java.util.*
+
+class DefaultPanel(
+    messageSource: Properties
+) : VerticalAppPanel(messageSource)

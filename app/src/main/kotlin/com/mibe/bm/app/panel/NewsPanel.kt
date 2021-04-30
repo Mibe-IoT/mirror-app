@@ -6,11 +6,13 @@ import com.mibe.bm.app.theme.FONT_COLOR
 import com.mibe.bm.wi.feed.model.News
 import com.mibe.bm.wi.feed.service.NewsService
 import java.awt.Font
+import java.util.*
 import javax.swing.Box
 
 class NewsPanel(
+    messageSource: Properties,
     private val newsService: NewsService,
-) : VerticalAppPanel() {
+) : VerticalAppPanel(messageSource) {
 
     val NEWS_AMOUNT = 9L
 

@@ -5,10 +5,12 @@ import com.mibe.bm.wi.weather.controller.WeatherController
 import com.mibe.bm.wi.weather.model.WeatherData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class WeatherPanel(
+    messageSource: Properties,
     private val weatherController: WeatherController
-) : VerticalAppPanel() {
+) : VerticalAppPanel(messageSource) {
 
     private val panelTitle = AppPanelType.WEATHER.asciiArt
     private val title: JMultilineLabel = creteTitleLabel(panelTitle)
