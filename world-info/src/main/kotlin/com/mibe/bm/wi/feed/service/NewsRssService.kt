@@ -4,7 +4,7 @@ import com.apptastic.rssreader.RssReader
 import com.mibe.bm.wi.feed.model.News
 import com.mibe.bm.wi.files.FilePathService
 import org.jsoup.Jsoup
-import java.io.File
+import java.util.*
 import java.util.stream.Collectors
 
 class NewsRssService(
@@ -14,8 +14,7 @@ class NewsRssService(
     private val reader: RssReader = RssReader()
 
     override fun getNews(amount: Long, contentMaxLength: Int): List<News> {
-        val inputStream = File(pathService.getFilePath("newsUrls.txt")).inputStream()
-        val urls = inputStream.bufferedReader().lines().collect(Collectors.toList())
+        val urls = ResourceBundle.getBundle("news").keySet()
         val news = urls.stream().map { reader.read(it) }
             .flatMap { it.limit(amount) }
             .limit(amount * 2)

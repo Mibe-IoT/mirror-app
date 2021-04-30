@@ -9,6 +9,12 @@ ext{
     ktor_version="1.5.3"
 }
 
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin/'
+    main.java.srcDirs += 'src/main/resources/'
+    test.java.srcDirs += 'src/test/kotlin/'
+}
+
 dependencies {
     api 'com.apptastic:rssreader:2.5.0'
     implementation 'org.jsoup:jsoup:1.13.1'

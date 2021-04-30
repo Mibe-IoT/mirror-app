@@ -9,7 +9,6 @@ import com.mibe.bm.wi.feed.service.NewsService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.awt.Font
-import javax.swing.Box
 
 class NewsPanel(
     private val messageService: MessageService,
@@ -52,7 +51,6 @@ class NewsPanel(
         removeAll()
         add(title)
         newsList.ifEmpty {
-            add(Box.createVerticalGlue())
             add(createJMultilineLabel(messageService.getMessage("error.no_internet_connection")))
         }
         newsList.forEach { addNewsRow(it) }

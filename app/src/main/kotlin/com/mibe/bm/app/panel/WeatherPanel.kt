@@ -88,7 +88,22 @@ class WeatherPanel(
                 ).joinToString(System.lineSeparator())
             )
         )
-        add(createJMultilineLabel(WeatherIcons.ATMOSPHERE.asciiArt))
+        add(createJMultilineLabel(getWeatherIcon(weatherData.weather[0].id)))
+    }
+
+    private fun getWeatherIcon(code: Int): String {
+        return when (code.toString()[0]) {
+            '2' -> WeatherIcons.THUNDERSTORM
+            '3' -> WeatherIcons.DRIZZLE
+            '5' -> WeatherIcons.RAIN
+            '6' -> WeatherIcons.SNOW
+            '7' -> WeatherIcons.ATMOSPHERE
+            else -> if (code == 800) {
+                WeatherIcons.CLEAR
+            } else {
+                WeatherIcons.CLOUDS
+            }
+        }.asciiArt
     }
 
 }

@@ -1,3 +1,7 @@
+plugins{
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
 group 'com.mibe.bm'
 version '1.0-SNAPSHOT'
 
@@ -6,8 +10,26 @@ repositories {
     jcenter()
 }
 
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin/'
+    main.java.srcDirs += 'src/main/resources/'
+    test.java.srcDirs += 'src/test/kotlin/'
+}
+
 dependencies {
     implementation project(':world-info')
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.mibe.bm.app.AppKt'
+    }
+}
+
+shadowJar {
+    archiveBaseName.set('bm')
+    archiveClassifier.set('')
+    archiveVersion.set('')
 }

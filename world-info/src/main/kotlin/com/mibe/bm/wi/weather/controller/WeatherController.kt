@@ -7,7 +7,6 @@ import com.mibe.bm.wi.weather.service.WeatherServiceImpl
 import com.mibe.bm.wi.web.service.WebClientService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.File
 import java.util.*
 
 class WeatherController(
@@ -17,18 +16,18 @@ class WeatherController(
     private val webClientService: WebClientService
     private val weatherService: WeatherService
 
-    private val propertiesPath = pathService.getFilePath("web.properties")
+    private val propertiesPath = "web.properties"
     private var weatherApiUrl: String
     private var weatherApiKey: String
     private var cityName: String = "Minsk"
 
     init {
-        val properties = Properties()
-        properties.load(File(propertiesPath).inputStream())
-        webClientService = WebClientService(properties.getProperty("api.ip-resolve.url"))
+//        val properties = Properties()
+        val props = ResourceBundle.getBundle("web")
+        webClientService = WebClientService(props.getString("api.ip-resolve.url"))
         weatherService = WeatherServiceImpl(webClientService)
-        weatherApiKey = properties.getProperty("api.weather.key")
-        weatherApiUrl = properties.getProperty("api.weather.url")
+        weatherApiKey = props.getString("api.weather.key")
+        weatherApiUrl = props.getString("api.weather.url")
         GlobalScope.launch {
             cityName = webClientService.getIpInfo().city
         }
@@ -39,10 +38,9 @@ class WeatherController(
     }
 
     fun reloadData() {
-        val properties = Properties()
-        properties.load(File(propertiesPath).inputStream())
-        weatherApiKey = properties.getProperty("api.weather.key")
-        weatherApiUrl = properties.getProperty("api.weather.url")
+        val props = ResourceBundle.getBundle("web")
+        weatherApiKey = props.getString("api.weather.key")
+        weatherApiUrl = props.getString("api.weather.url")
         GlobalScope.launch {
             cityName = webClientService.getIpInfo().city
         }
