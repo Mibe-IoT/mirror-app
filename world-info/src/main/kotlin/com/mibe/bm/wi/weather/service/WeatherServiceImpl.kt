@@ -10,6 +10,7 @@ class WeatherServiceImpl(
     override suspend fun getWeatherData(cityName: String, weatherApiKey: String, weatherApiUrl: String)
             : WeatherData {
         val url = weatherApiUrl.format(cityName, weatherApiKey)
+        println(url)
         return webClientService.requestForObject(url)
     }
 

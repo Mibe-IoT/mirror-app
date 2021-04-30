@@ -1,29 +1,53 @@
 package com.mibe.bm.app.panel
 
 import com.mibe.bm.app.component.JMultilineLabel
-import com.mibe.bm.wi.feed.service.NewsService
+import com.mibe.bm.wi.weather.controller.WeatherController
+import com.mibe.bm.wi.weather.model.WeatherData
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class WeatherPanel(
-    private val newsService: NewsService,
+    private val weatherController: WeatherController
 ) : VerticalAppPanel() {
 
     private val panelTitle = AppPanelType.WEATHER.asciiArt
-    private val title: JMultilineLabel
+    private val title: JMultilineLabel = creteTitleLabel(panelTitle)
+    private lateinit var weatherData: WeatherData
 
     init {
-        title = creteTitleLabel(panelTitle)
-        redraw()
+        add(title)
+        loadWeather()
         isVisible = true
     }
 
     override fun onAction() {
-        redraw()
+        loadWeather()
+    }
+
+    private fun redraw(weatherData: WeatherData) {
+        removeAll()
+        add(title)
+        addWeatherData(weatherData)
         validate()
     }
 
-    private fun redraw() {
-        removeAll()
-        add(title)
+    private fun loadWeather() {
+        GlobalScope.launch {
+            weatherData = weatherController.getWeatherData()
+            println(weatherData)
+
+        }.invokeOnCompletion {
+            redraw(weatherData)
+        }
+    }
+
+    private fun addWeatherData(weatherData: WeatherData) {
+        val labelWeatherMain = createJMultilineLabel(weatherData.weather[0].main)
+        val labelWeatherDescription = createJMultilineLabel(weatherData.weather[0].main)
+        val temp = createJMultilineLabel(weatherData.main.temp.toString())
+        add(labelWeatherMain)
+        add(labelWeatherDescription)
+        add(temp)
     }
 
 }

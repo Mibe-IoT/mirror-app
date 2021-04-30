@@ -9,4 +9,5 @@ repositories {
 dependencies {
     implementation project(':world-info')
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3'
 }

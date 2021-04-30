@@ -24,6 +24,13 @@ open class AppPanel : JPanel() {
         background = DEFAULT_BG
     }
 
+    protected fun createJMultilineLabel(text: String): JMultilineLabel {
+        return JMultilineLabel(text).apply {
+            foreground = com.mibe.bm.app.theme.FONT_COLOR
+            font = Font(Font.MONOSPACED, Font.BOLD, com.mibe.bm.app.theme.ELEMENT_FONT_CONTENT_SIZE)
+        }
+    }
+
     open fun creteTitleLabel(title: String): JMultilineLabel {
         return JMultilineLabel(title).apply {
             font = Font(Font.MONOSPACED, Font.BOLD, com.mibe.bm.app.theme.ELEMENT_FONT_TITLE_SIZE)
