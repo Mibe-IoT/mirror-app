@@ -28,7 +28,7 @@ class WebClientService(
 
     init {
         properties.load(File(pathService.getFilePath("web.properties")).inputStream())
-        ipUrl = properties.getProperty("url.ip-resolve")
+        ipUrl = properties.getProperty("api.ip-resolve.url")
     }
 
     suspend inline fun <reified T> requestForObject(url: String): T {
