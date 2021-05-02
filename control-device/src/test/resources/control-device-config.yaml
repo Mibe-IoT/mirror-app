@@ -3,5 +3,5 @@ homeWifi:
   password: 12345678
 
 controlDeviceWifi:
-  ssid: No-Mac
+  ssid: Mac
   password: 12345678

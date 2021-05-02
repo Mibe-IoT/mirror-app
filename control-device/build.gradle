@@ -26,8 +26,6 @@ sourceSets {
 }
 
 dependencies {
-    api 'com.apptastic:rssreader:2.5.0'
-
     compile 'com.github.uchuhimo.konf:konf:master-SNAPSHOT'
 
     implementation 'org.jsoup:jsoup:1.13.1'
