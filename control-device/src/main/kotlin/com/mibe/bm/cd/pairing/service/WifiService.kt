@@ -33,6 +33,16 @@ class WifiService {
     fun connectToControlDeviceWifi() {
         val ssid = controlDeviceWifiConfig.get<String>("ssid")
         val password = controlDeviceWifiConfig.get<String>("password")
+        connectToWifi(ssid, password)
+    }
+
+    fun connectToHomeWifi() {
+        val ssid = homeWifiConfig.get<String>("ssid")
+        val password = homeWifiConfig.get<String>("password")
+        connectToWifi(ssid, password)
+    }
+
+    private fun connectToWifi(ssid: String, password: String) {
         val programPath = shellScript()
         rulesToExecute(programPath)
         Runtime.getRuntime().exec(setArgs(programPath, ssid, password))
