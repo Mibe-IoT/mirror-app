@@ -1,4 +1,5 @@
 rootProject.name = 'black-mirror'
 include 'world-info'
+include 'control-device'
 include 'app'
 
