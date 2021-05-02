@@ -4,6 +4,8 @@
 *.class
 .idea
 
+web.properties
+
 # Log file
 *.log
 
