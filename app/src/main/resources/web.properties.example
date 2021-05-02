@@ -1,0 +1,3 @@
+api.ip-resolve.url= #Ip used to get current ip info, such as town, region
+api.weather.url=    #Weather api url
+api.weather.key=    #Key from weather api
