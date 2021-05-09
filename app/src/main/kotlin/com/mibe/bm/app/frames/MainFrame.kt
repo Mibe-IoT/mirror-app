@@ -8,7 +8,7 @@ import javax.swing.JPanel
 
 class MainFrame(additionalPanels: List<AppPanel> = listOf()) : JFrame() {
 
-    private val panels: MutableList<AppPanel> = mutableListOf(DefaultPanel())
+    private val panels: MutableList<AppPanel> = mutableListOf()
     private var currentPanel = 0
 
     private val nextPanel: AppPanel
@@ -28,14 +28,15 @@ class MainFrame(additionalPanels: List<AppPanel> = listOf()) : JFrame() {
         }
 
     init {
-//        extendedState = MAXIMIZED_BOTH
         size = Dimension(500, 500)
         isUndecorated = true
         isResizable = true
         defaultCloseOperation = EXIT_ON_CLOSE
-        contentPane = panels[0]
-        setLocationRelativeTo(null)
         panels.addAll(additionalPanels)
+        if(panels.isNotEmpty()) {
+            contentPane = panels[0]
+        }
+        setLocationRelativeTo(null)
 
 
         isVisible = true
@@ -47,6 +48,13 @@ class MainFrame(additionalPanels: List<AppPanel> = listOf()) : JFrame() {
 
     fun previousPanel() {
         changePanelTo(previousPanel)
+    }
+
+    fun goHome() {
+        if(panels.isNotEmpty()){
+            currentPanel = 0
+            changePanelTo(panels[currentPanel])
+        }
     }
 
     fun doAction() {

@@ -10,6 +10,7 @@ class KeyboardListener(private val callbacks: Callbacks) : KeyAdapter() {
         fun onLeft() {}
         fun onRight() {}
         fun onAction() {}
+        fun onHome() {}
         fun onA() {}
         fun onS() {}
     }
@@ -21,6 +22,7 @@ class KeyboardListener(private val callbacks: Callbacks) : KeyAdapter() {
             KeyEvent.VK_R -> callbacks.onAction()
             KeyEvent.VK_A -> callbacks.onA()
             KeyEvent.VK_S -> callbacks.onS()
+            KeyEvent.VK_H -> callbacks.onHome()
         }
         if (e.isControlDown) {
             if (e.keyCode == KeyEvent.VK_Q) {

@@ -2,6 +2,7 @@ package com.mibe.bm.app
 
 import com.mibe.bm.app.controller.AppController
 import com.mibe.bm.app.frames.MainFrame
+import com.mibe.bm.app.panel.DefaultPanel
 import com.mibe.bm.app.panel.NewsPanel
 import com.mibe.bm.app.panel.WeatherPanel
 import com.mibe.bm.app.service.MessageServiceImpl
@@ -16,6 +17,7 @@ fun main() {
     val messageSource = ResourceBundle.getBundle("messages")
     val messageService = MessageServiceImpl(messageSource)
     val panels = listOf(
+        DefaultPanel(messageService),
         NewsPanel(messageService, NewsRssService(filePathService)),
         WeatherPanel(messageService, WeatherController(filePathService))
     )

@@ -39,4 +39,7 @@ class AppController(
         mainFrame.doAction()
     }
 
+    override fun onHome() {
+        mainFrame.goHome()
+    }
 }
