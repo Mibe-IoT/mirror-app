@@ -7,6 +7,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
     jcenter()
 }
 
@@ -18,6 +19,7 @@ sourceSets {
 
 dependencies {
     implementation project(':world-info')
+    implementation project(':control-device')
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3'
 }

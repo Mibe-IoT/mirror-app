@@ -1,7 +1,7 @@
 homeWifi:
-  ssid: Mac
-  password: 12345678
+  ssid: MONKI_FLIP
+  password: komnatahuemnata22
 
 controlDeviceWifi:
-  ssid: No-Mac
+  ssid: unattached2
   password: 12345678

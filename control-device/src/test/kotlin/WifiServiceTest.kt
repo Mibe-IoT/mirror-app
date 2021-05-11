@@ -5,15 +5,15 @@ import org.junit.Test
 
 class WifiServiceTest {
     @Test
-    fun shellCommandTest() {
-        val wifiService = WifiService()
-        val shellCommand = wifiService.shellScript()
-        print(shellCommand)
-    }
-
-    @Test
     fun changeWifiTest() {
         val wifiService = WifiService()
         wifiService.connectToControlDeviceWifi()
+    }
+
+    @Test
+    fun scanWifiTest() {
+        val wifiService = WifiService()
+        val list = wifiService.scanWifi()
+        list.forEach { print(it) }
     }
 }

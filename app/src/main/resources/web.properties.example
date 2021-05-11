@@ -1,8 +1,0 @@
-#Ip used to get current ip info, such as town, region
-api.ip-resolve.url=     #https://ipapi.co/json/
-
-#Weather api url with placeholders for city and api key
-api.weather.url=        #https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s
-
-#Key from weather api
-api.weather.key=        #SOmeKey121242234
