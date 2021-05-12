@@ -13,19 +13,28 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.decodeFromString
 
-class EventService(private val ip: String, private val callbacks: Callbacks) {
+class EventService(
+    private val ip: String,
+    private val connectedCallback: (session: WebSocketSession) -> Unit,
+    private val callbacks: Callbacks,
+    private val metricCallback: (metric: MetricDTO) -> Unit
+) {
     private val client = HttpClient(CIO) {
         install(WebSockets)
+    }
+
+    lateinit var session: WebSocketSession
+
+    suspend fun requestMetrics() {
+        val request = "{\"type\": \"metric\"}"
+        session.send(request)
     }
 
     interface Callbacks {
         fun onForwardButtonPush() {}
         fun onBackButtonPush() {}
         fun onActionButtonPush() {}
-        fun onMetricReceived(metric: MetricDTO) {}
     }
-
-
 
     suspend fun connect() {
         client.ws(
@@ -34,24 +43,27 @@ class EventService(private val ip: String, private val callbacks: Callbacks) {
             port = 81,
             path = "/"
         ) {
+            connectedCallback(this)
+            session = this
             while (true) {
-                incoming.consumeAsFlow()
-                    .mapNotNull { it as? Frame.Text }
-                    .map { it.readText() }
-                    .map {
-                        if (it.matches(".+button.+".toRegex())) {
-                            val buttonPushed = Json.decodeFromString<ButtonDTO>(it)
+                when (val frame = incoming.receive()) {
+                    is Frame.Text -> {
+                        val message = frame.readText()
+                        println(message)
+                        if (message.matches(".+button.+".toRegex())) {
+                            val buttonPushed = Json.decodeFromString<ButtonDTO>(message)
                             when (buttonPushed.value) {
                                 "back" -> callbacks.onBackButtonPush()
                                 "forward" -> callbacks.onForwardButtonPush()
                                 "action" -> callbacks.onActionButtonPush()
                             }
                         }
-                        if (it.matches(".+metric.+".toRegex())) {
-                            val metricReceived = Json.decodeFromString<MetricDTO>(it)
-                            callbacks.onMetricReceived(metricReceived)
+                        if (message.matches(".+metric.+".toRegex())) {
+                            val metricReceived = Json.decodeFromString<MetricDTO>(message)
+                            metricCallback(metricReceived)
                         }
                     }
+                }
             }
         }
     }

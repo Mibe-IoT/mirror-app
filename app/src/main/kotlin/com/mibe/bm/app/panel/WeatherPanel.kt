@@ -46,7 +46,7 @@ class WeatherPanel(
         GlobalScope.launch {
             weatherData = weatherController.getWeatherData()
         }.invokeOnCompletion {
-            redraw()
+//            redraw()
         }
     }
 
